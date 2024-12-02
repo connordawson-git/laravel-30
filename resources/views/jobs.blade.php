@@ -1,6 +1,16 @@
 <x-layout>
     <x-slot:heading>
-        About Page
+        Jobs Page
     </x-slot:heading>
-    <h1>Hello from about</h1>
+    <h1>Hello from Jobs</h1>
+
+    <ul>
+        @foreach($jobs as $job)
+            <li>
+                <a href="/jobs/{{ $job['id']}}">
+                    {{ $job['title'] . " " .  $job['salary']}}
+                </a>
+            </li>
+        @endforeach
+    </ul>
 </x-layout>
