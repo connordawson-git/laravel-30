@@ -2,14 +2,13 @@
 
 namespace App\Models;
 
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Job extends Model {
-
+class Employer extends Model
+{
     use HasFactory;
-    protected $table = "job_listing";
+    protected $table = "employers";
 
     /**
      * The attributes that are mass assignable.
@@ -17,8 +16,6 @@ class Job extends Model {
      * @var array<int, string>
      */
     protected $fillable = [
-        'title',
-        'salary'
+        'name'
     ];
-
 }
