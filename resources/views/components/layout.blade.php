@@ -15,7 +15,9 @@
             <div class="flex h-16 items-center justify-between">
                 <div class="flex items-center">
                     <div class="shrink-0">
-                        <img class="size-8" src="https://laracasts.com/images/logo/logo-triangle.svg" alt="Your Company">
+                        <a href="/">
+                            <img class="size-8" src="https://laracasts.com/images/logo/logo-triangle.svg" alt="Your Company">
+                        </a>
                     </div>
                     <div class="hidden md:block">
                         <div class="ml-10 flex items-baseline space-x-4">
@@ -24,14 +26,21 @@
                                 <x-nav-link href="/jobs" :active="request()->is('jobs')">Jobs</x-nav-link>
                                 <x-nav-link href="/contact" :active="request()->is('contact')">Contact</x-nav-link>
                             @endauth
-                            @guest()
-                                <x-nav-link href="/login" :active="request()->is('login')" >Log In</x-nav-link>
-                                <x-nav-link href="/register" :active="request()->is('register')">Register</x-nav-link>
-                            @endguest
                         </div>
                     </div>
                 </div>
-
+                <div class="flex">
+                    @guest()
+                        <x-nav-link href="/login" :active="request()->is('login')" >Log In</x-nav-link>
+                        <x-nav-link href="/register" :active="request()->is('register')">Register</x-nav-link>
+                    @endguest
+                    @auth()
+                        <form method="POST" action="/logout">
+                            @csrf
+                            <x-form-button>Log Out</x-form-button>
+                        </form>
+                    @endauth
+                </div>
                 <div class="-mr-2 flex md:hidden">
                     <!-- Mobile menu button -->
                     <button type="button" class="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-controls="mobile-menu" aria-expanded="false">
@@ -64,7 +73,9 @@
     <header class="bg-white shadow">
         <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8 sm:flex sm:justify-between">
             <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{ $heading }}</h1>
-            <x-button href="/jobs/create">Create Job</x-button>
+            @auth()
+                <x-button href="/jobs/create">Create Job</x-button>
+            @endauth
         </div>
     </header>
     <main>
