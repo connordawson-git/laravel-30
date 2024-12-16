@@ -19,11 +19,13 @@ Route::view('/', 'home');
 //    Route::delete('/jobs/{job}', 'destroy');
 //});
 
-Route::resource('jobs', JobController::class);
+Route::resource('jobs', JobController::class)->only(['index', 'show']);
+Route::resource('jobs', JobController::class)->except(['index', 'show'])->middleware('auth');
+
 Route::view('/contact', 'contact');
 
 Route::get('/register', [RegisterController::class, 'create']);
 Route::post('/register', [RegisterController::class, 'store']);
-Route::get('/login', [SessionController::class, 'create']);
+Route::get('/login', [SessionController::class, 'create'])->name('login');
 Route::post('/login', [SessionController::class, 'store']);
 Route::post('/logout', [SessionController::class, 'destroy']);
