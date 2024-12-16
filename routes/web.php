@@ -20,7 +20,9 @@ Route::view('/', 'home');
 //});
 
 Route::resource('jobs', JobController::class)->only(['index', 'show']);
-Route::resource('jobs', JobController::class)->except(['index', 'show'])->middleware('auth');
+Route::resource('jobs', JobController::class)->except(['index', 'show'])
+    ->middleware('auth')
+    ->can('edit', 'job');
 
 Route::view('/contact', 'contact');
 
